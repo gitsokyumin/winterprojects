@@ -1,0 +1,9 @@
+{% if journal_list %}
+    <ul>
+    {% for journal in journal_list %}
+        <li><a href="{% url 'home:detail' journal.id %}">{{ journal.subject }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p> 기사가 없습니다.</p>
+{% endif %}
