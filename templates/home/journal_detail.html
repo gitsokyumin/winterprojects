@@ -2,3 +2,16 @@
 <div>
     {{ journal.content }}
 </div>
+<h5>{{ journal.comment_set.count }}개의 답변이 있습니다.</h5>
+<div>
+    <ul>
+    {% for comment in journal.comment_set.all %}
+        <li>{{ comment.content }}</li>
+    {% endfor %}
+    </ul>
+</div>
+<form action="{% url 'home:comment_create' journal.id %}" method="post">
+    {% csrf_token %}
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답글등록">
+    </form>
