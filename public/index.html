@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>자리 뽑기 시스템</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header><h1>🎨 자리 뽑기 시스템</h1></header>
+
+    <!-- STEP 1: 로비 -->
+    <section id="lobby">
+      <div class="card">
+        <h2>방 만들기 (교사/호스트)</h2>
+        <textarea id="names" placeholder="학생 이름을 줄바꿈으로 붙여넣기"></textarea>
+        <button id="btnCreate">방 생성</button>
+        <p class="hint">생성 후 방 코드가 표시됩니다.</p>
+      </div>
+
+      <div class="card">
+        <h2>방 참여</h2>
+        <input id="joinCode" placeholder="방 코드" />
+        <input id="myName" placeholder="내 이름" />
+        <select id="prefGroup">
+          <option value="">그룹 자동</option>
+          <option value="A">A 그룹 희망</option>
+          <option value="B">B 그룹 희망</option>
+        </select>
+        <button id="btnJoin">입장</button>
+      </div>
+
+      <div class="card" id="roomInfo" style="display:none;">
+        <h3>방 코드: <span id="roomCode"></span></h3>
+        <div id="playerList"></div>
+        <button id="btnStartA" class="primary" style="display:none;">A 단계 시작</button>
+      </div>
+    </section>
+
+    <!-- STEP 2/3: 게임 화면 -->
+    <section id="game" style="display:none;">
+      <div class="topbar">
+        <div>방 코드: <span id="codeLive"></span></div>
+        <div>내 이름: <span id="meName"></span> (<span id="meGroup"></span>)</div>
+        <div>현재 단계: <span id="phase"></span></div>
+      </div>
+
+      <div id="turnBox" class="card">
+        <h3>진행 순서</h3>
+        <ol id="turnOrder"></ol>
+        <p>현재 차례: <span id="turnNow"></span></p>
+      </div>
+
+      <div id="grid" class="grid"></div>
+
+      <div id="actions" class="card">
+        <button id="btnCapture">현재 보드 이미지 저장</button>
+      </div>
+    </section>
+
+    <!-- Canvas 모달 (A그룹 그림) -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <canvas id="draw" width="300" height="300"></canvas>
+        <div class="tools">
+          <button id="clear">지우기</button>
+          <button id="submit">이 칸에 저장</button>
+          <button id="cancel">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
+
